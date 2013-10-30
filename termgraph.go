@@ -49,22 +49,25 @@ func printGraphs(headers []string, values []string, width int) {
         }
     }
 
-    //Use the max header size and given width to calc graph width
-    //Currently scales to terminal width - 1
-    graph_width:= width-(max_head+2)-4
 
     new_vals := convertStrings(values)
     //Find max value to calculate scale
     max_val, min_val := 0.0, 0.0
+    max_val_len := 0
     for _, val := range new_vals {
         if max_val < val {
             max_val = val
+            max_val_len = len(fmt.Sprintf("%v", val))
         }
         if min_val > val {
             min_val = val
         }
     }
 
+    //Use the max header size and given width to calc graph width
+    //Currently scales to terminal width - 1
+    graph_width:= width-(max_head+2)-(max_val_len + 3)
+    fmt.Println(max_val_len)
     //Calculate scale
     scale := float64(graph_width) / (max_val - min_val)
     
