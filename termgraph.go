@@ -67,7 +67,6 @@ func printGraphs(headers []string, values []string, width int) {
     //Use the max header size and given width to calc graph width
     //Currently scales to terminal width - 1
     graph_width:= width-(max_head+2)-(max_val_len + 3)
-    fmt.Println(max_val_len)
     //Calculate scale
     scale := float64(graph_width) / (max_val - min_val)
     
